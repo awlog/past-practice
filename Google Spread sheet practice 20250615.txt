@@ -1,0 +1,7 @@
+Google Spread sheet： creating a button to display the latest date
+
+・Inserting Date
+https://docs.google.com/spreadsheets/d/1i0oUCLnamNdU8a1Lk48UGu8e_XJL-dP3HAvm9ErIAR8/edit?gid=0#gid=0
+
+・Apps Script
+https://script.google.com/u/0/home/projects/1XM63xlpkJBlulLHqiKAaxGx1-5arV-iZzB5bM-xkOuwvBOP_z8jCivTF/edit
