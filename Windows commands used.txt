@@ -1,0 +1,95 @@
+Windows commands used in command prompt
+
+【Network】
+ping
+ipconfig /all
+tracert -d
+nslookup
+
+netsh wlan to show wlanreport
+
+ncpa.cpl　for network checking
+
+【Others】
+gpupdate /force
+sfc /scaanow
+hostname
+systeminfo
+mkdir
+sudo apt install
+sudo apt update
+sudo apt upgrade
+
+
+【PXE Imaging】
+1. Imaging error/ troubleshooting
+win+F8 or shift+F8 or F8 when the error pops up
+
+~Disk cleaning~
+From a command prompt, run the following commands:
+	• Diskpart
+	• Select disk 0
+	• Clean
+	• Create partition primary
+	• Format fs=ntfs quick
+	• Assign
+	• Exit
+
+2.
+Internal Policy update after imaging
+・set logonserver
+・gpupdate /force
+
+Imaging troubleshooting
+Action - Ran sfc /scannow
+Ran Dism /online /cleanup-image /restorehealth
+
+Action:
+- Ran these commands as admins
+- dsregcmd /leave /debug
+- dsregcmd /join /debug
+- dsregcmd /status
+- GPUPDATE
+- gpupdate /force
+- Rebooted
+- Checked staled scheduled tasks - not found any
+- Checked stale registry key - not found
+- Checked the previous Intune certificate - not found any
+- Started the enrollment process
+- Ran psexec.exe file in elevated cmd as admin
+- Ran %windir%\system32\deviceenroller.exe /c /AutoEnrollMDM
+- Ran dsregms /status
+- Ran gpupdate /force
+- Rebooted the device
+
+ーーーーーーーーーーーーーーーーーーーー
+【Deploy 22H2 Update with Microsoft Update StandalonePackage (MSU) Manually】
+ 
+Step 1: Download the .MSU file from where it is instructed
+ 
+1. Move the downloaded file to C:\KB5041582 *create this folder & head
+to C:\temp and create another folder named ‘5041582’ *Named after
+the KB.
+ーーーーーーーーーーーー
+Step 2: Run CMD as administrator and extract file
+1. Run the script:
+Expand –F:* c:\KB5041582\windows10.0-kb5041582-x64_aef566aad27209be83d504162b09f910f43ae2a5.msu
+ c:\temp\5041582
+ 
+2. The .cab files are extracted to c:\temp\5041582
+ 
+3. On the same command prompt run the following script, 
+DISM.exe /Online /Add-Package /PackagePath:c:\temp\5041582\windows10.0-kb5041582-x64.cab
+ 
+4. Head to Windows Update for the 22H2 Update
+ーーーーーーーーーーーー
+Step 3. If windows update is stuck or not appearing
+1. net stop wuauserv = stops the windows update service
+2. net start wuauserv = starts the service (if not restarted
+automatically)
+3.Continue running the update *this may take several tries
+ーーーーーーーーーーーー
+Step 4. Confirm 22H2 Version
+1. Head to Entra look for the non-complaint device.
+2. The version should start with .19045 (22H2)
+
