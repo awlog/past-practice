@@ -124,7 +124,7 @@ It could be installed.
 wsl.exe --install
 ---
 
-2. You have to enable the below 3 itmes in Programs of 'Windows Features' from Control Panel.
+2. You have to enable the below 3 itmes in Programs of 'Turn Windows features on or off' from Control Panel.
 　 ・Windows Subsystem for Linux (Linux用 Windows サブシステム)
    ・Virtual Machine Platform
    ・Windows Hypervisor Platform (Windows　ハイパーバイザープラットフォーム)
@@ -134,3 +134,4 @@ wsl.exe --install
 6. Set your UIX name and PW
 
 7. Run the command: sudo apt update
+
