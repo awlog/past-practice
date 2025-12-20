@@ -10,7 +10,7 @@
 ・Progress to continue to use Linux Ubuntu installed today on PC2 for SSH, Teraterm, etc.
 
 【How long it took】
-・5 hours (including documenting time)
+・4 hours (including documenting time)
 
 【PC1:What have I learned & tried but did not work】
 1. Download virtualbox and Almalinux
@@ -132,4 +132,5 @@ wsl.exe --install
 4. Install Ubuntu LTS from Microsoft Store.
 5. Open Ubuntu from Start Menu & wait for few minute for the rest of installatiom to be completed
 6. Set your UIX name and PW
+
 7. Run the command: sudo apt update
