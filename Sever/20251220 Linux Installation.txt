@@ -1,0 +1,135 @@
+【Plan for 20251220：Install Linux & use it on existing Windows OS】
+
+【Outcome】
+・Tried PC1 and PC2 to test spec and online articels / YouTube videos
+  and the test result showed that only PC2 could install Ubuntu
+  as PC1 did not meet the spec to install for WSL2, and then Ubuntu.
+・Virtual box could not function proplery on PC1
+
+【Next step】
+・Progress to continue to use Linux Ubuntu installed today on PC2 for SSH, Teraterm, etc.
+
+【How long it took】
+・5 hours (including documenting time)
+
+【PC1:What have I learned & tried but did not work】
+1. Download virtualbox and Almalinux
+www.virtualbox.org
+https://ftp.jaist.ac.jp/pub/Linux/almalinux/10.1/isos/x86_64/
+
+*Virtualbox could be installed but could run Almalinux
+↓
+Error
+ーーー
+終了コード :E_FAIL (0x80004005)
+コンポーネント:ConsoleWrap
+インターフェース:IConsole {6ac83d89-6ee7-4e33-8ae6-b257b2e81be8}
+ーーー
+↓
+・Tried uninstall and install virtualbox again
+・Also tried CMD as admin to delete virualbox folder manually
+・Reboot the laptop
+------
+cd C:\Program Files
+del Oracle
+------
+
+What esle could be tried for PC1?
+・Re-install Win 10 or do a disk clean.
+
+
+～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+PC1 Spec
+-----------
+モデル: SONY VJP132 (Laptop) Win 10 (WSL1 only)
+プロセッサ	Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz   2.20 GHz
+実装 RAM	4.00 GB
+システムの種類	64 ビット オペレーティング システム、x64 ベース プロセッサ
+ペンとタッチ	このディスプレイでは、ペン入力とタッチ入力は利用できません
+-----------
+
+cmd
+----------
+C:\WINDOWS\system32>wsl.exe
+Linux 用 Windows サブシステムが Microsoft Store で入手可能になりました。
+'wsl.exe --update' を実行するか、https://aka.ms/wslstorepage にアクセスしてアップグレードできます
+Microsoft Store から WSL をインストールすると、最新の WSL 更新がより速く提供されます。
+詳細については、https://aka.ms/wslstoreinfo
+をご覧ください。
+
+C:\WINDOWS\system32>wsl.exe --update
+インストール中: Linux 用 Windows サブシステム
+Linux 用 Windows サブシステム  はインストールされました。
+
+C:\WINDOWS\system32>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+展開イメージのサービスと管理ツール
+バージョン: 10.0.19041.3636
+
+イメージのバージョン: 10.0.19045.6691
+
+機能を有効にしています
+[==========================100.0%==========================]
+操作は正常に完了しました。
+
+
+C:\WINDOWS\system32>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+展開イメージのサービスと管理ツール
+バージョン: 10.0.19041.3636
+
+イメージのバージョン: 10.0.19045.6691
+
+機能を有効にしています
+[==========================100.0%==========================]
+操作は正常に完了しました。
+
+
+C:\Users\alan>wsl --list --verbose
+  NAME      STATE           VERSION
+* Ubuntu    Stopped         1
+
+C:\Users\alan> wsl --set-version Ubuntu 2
+WSL 2 との主な違いについては、https://aka.ms/wsl2
+ を参照してください
+変換中です。これには数分かかる場合があります。
+
+WSL2 は、現在のマシン構成ではサポートされていません。
+"仮想マシン プラットフォーム" オプション コンポーネントを有効にし、さらに、BIOS で仮想化を有効にしてください。
+"仮想マシン プラットフォーム" を有効にするには、次のコマンドを実行します: wsl.exe --install --no-distribution
+詳細については、https://aka.ms/enablevirtualization をご覧ください
+エラー コード: Wsl/Service/CreateVm/HCS/HCS_E_HYPERV_NOT_INSTALLED
+
+C:\WINDOWS\system32>bcdedit /set hypervisorlaunchtype auto
+この操作を正しく終了しました。
+----------
+
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+PC2 Spec
+-----------
+モデル: ASUS　X512DA (Laptop) Win 11 (WSl 2.6.3)
+プロセッサ	AMD Ryzen 7 7300U with Radeon Vega Mobile Gfx (2.3GHz)
+実装 RAM	8.00 GB
+システムの種類	64 ビット オペレーティング システム、x64 ベース プロセッサ
+ペンとタッチ	このディスプレイでは、ペン入力とタッチ入力は利用できません
+----------
+
+Based on the result of PC1, tried the WSL2 option directly to see how it goes.
+It could be installed.
+
+1. WSl2 could be installed
+
+---
+wsl.exe --install
+---
+
+2. You have to enable the below 3 itmes in Programs of 'Windows Features' from Control Panel.
+　 ・Windows Subsystem for Linux (Linux用 Windows サブシステム)
+   ・Virtual Machine Platform
+   ・Windows Hypervisor Platform (Windows　ハイパーバイザープラットフォーム)
+3. Reboot the laptop
+4. Install Ubuntu LTS from Microsoft Store.
+5. Open Ubuntu from Start Menu & wait for few minute for the rest of installatiom to be completed
+6. Set your UIX name and PW
+7. Run the command: sudo apt update
