@@ -1,0 +1,13 @@
+2025.12.20
+
+It was upgradable after taking apart the back cover.
+However, with the world shortage supplies of RAM, the price is sky rocketing.
+No upgrade plan at the moment.
+
+
+------
+PC System Info.
+デバイス名	LAPTOP-O72JMJD5
+プロセッサ	AMD Ryzen 7 3700U with Radeon Vega Mobile Gfx   (2.30 GHz)
+実装 RAM	8.00 GB (5.95 GB 使用可能)
+------
