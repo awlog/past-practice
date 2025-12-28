@@ -1,0 +1,11 @@
+1. Regoster account and download CSICO Packet Tracer
+htps://www.netacad.com/articles/news/download-cisco-packet-tracer
+
+2. Commads used for Router0 at the end from CLI
+
+exit
+config t
+int g 0/0.1
+encapsulation dot1q 20
+ip address 192.168.20.1 255.255.2550
+exit
