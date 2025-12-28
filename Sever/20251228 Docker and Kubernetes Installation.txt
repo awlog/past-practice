@@ -1,0 +1,129 @@
+～Docker～
+
+【Preparation】
+sudo apt update
+    sudo apt install ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+
+    sudo groupadd docker
+    sudo usermod -aG docker <ユーザー名>
+
+
+【Docker　Engine Installation】
+sudo snap install docker
+sudo apt-get install -y containerd.io
+
+【Result】
+awtest@LAPTOP-O72JMJD5:~$ docker --version
+Docker version 28.4.0, build d8eb465
+
+
+【Make it affective】
+sudo systemctl restart containerd
+==================================================
+==================================================
+
+～Kubernetes～
+
+Muilti-node
+https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/tutorial/getting-started/
+
+sudo snap install k8s --classic --channel=1.35-classic/stable
+
+
+ーーー
+sudo snap install k8s --classic --channel=1.35-classic/stable
+k8s (1.35-classic/stable) v1.35.0 from Canonical✓ installed
+ーーー
+
+
+sudo k8s bootstrap
+
+【Error: when docker is already installed】
+Bootstrap config verification failed: pre-init checks failed for node: The path '/run/containerd' required for the containerd socket already exists. This 
+may mean that another service is already using that path, and it conflicts with the k8s snap. Please make sure that there is no other service installed that uses the same path, and remove the existing directory.(dev-only): You can change the default k8s containerd base path with the containerd-base-dir option in the bootstrap / join-cluster config file.a
+
+【Resolution: be careful with the space requireiked: like space before and after network 】
+---
+https://documentation.ubuntu.com/canonical-kubernetes/latest/snap/howto/install/dev-env/
+---
+
+cat <<EOF | sudo k8s bootstrap --file -
+containerd-base-dir: var/lib/conatinerdl:
+cluster-config:
+  network:
+    enabled: true
+  dns:
+    enabled: true
+  local-storage:
+    enabled: true
+EOF
+Bootstrapping the cluster. This may take a few seconds, please wait.
+Bootstrapped a new Kubernetes cluster with node address "10.255.255.254:6400".
+The node will be 'Ready' to host workloads after the CNI is deployed successfully.
+
+awtest@LAPTOP-O72JMJD5:~$ sudo k8s bootstrap
+Error: The node is already part of a cluster
+
+
+sudo k8s status
+
+cluster status:           not ready
+control plane nodes:      10.255.255.254:6400 (voter)
+high availability:        no
+datastore:                etcd
+network:                  enabled
+dns:                      enabled at 10.152.183.185
+ingress:                  disabled
+load-balancer:            disabled
+local-storage:            enabled at /var/snap/k8s/common/rawfile-storage
+gateway                   disabled
+
+sudo k8s kubectl get all --all-namespaces
+
+NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE
+kube-system   pod/cilium-operator-57b777dd8-q2j9x       0/1     Pending   0          6m57s
+kube-system   pod/ck-storage-rawfile-csi-controller-0   0/2     Pending   0          6m58s
+kube-system   pod/coredns-8568db6d4f-7wflb              0/1     Pending   0          6m58s
+kube-system   pod/coredns-8568db6d4f-cgwq6              0/1     Pending   0          6m44s
+kube-system   pod/metrics-server-575579b55b-xg782       0/1     Pending   0          6m58s
+
+NAMESPACE     NAME                                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+default       service/kubernetes                          ClusterIP   10.152.183.1     <none>        443/TCP         7m5s
+kube-system   service/ck-storage-rawfile-csi-controller   ClusterIP   None             <none>        <none>          7m1s
+kube-system   service/ck-storage-rawfile-csi-node         ClusterIP   10.152.183.103   <none>        9100/TCP        7m1s
+kube-system   service/coredns                             ClusterIP   10.152.183.185   <none>        53/UDP,53/TCP   7m2s
+kube-system   service/hubble-peer                         ClusterIP   10.152.183.147   <none>        443/TCP         7m
+kube-system   service/metrics-server                      ClusterIP   10.152.183.194   <none>        443/TCP         7m2s
+
+NAMESPACE     NAME                                         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+kube-system   daemonset.apps/cilium                        0         0         0       0            0           kubernetes.io/os=linux   7m1s
+kube-system   daemonset.apps/ck-storage-rawfile-csi-node   0         0         0       0            0           <none>                   7m2s
+
+NAMESPACE     NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/cilium-operator   0/1     1            0           7m1s
+kube-system   deployment.apps/coredns           0/2     2            0           7m3s
+kube-system   deployment.apps/metrics-server    0/1     1            0           7m3s
+
+NAMESPACE     NAME                                         DESIRED   CURRENT   READY   AGE
+kube-system   replicaset.apps/cilium-operator-57b777dd8    1         1         0       6m58s
+kube-system   replicaset.apps/cilium-operator-75d9cfcc78   0         0         0       6m59s
+kube-system   replicaset.apps/coredns-8568db6d4f           2         2         0       6m59s
+kube-system   replicaset.apps/metrics-server-575579b55b    1         1         0       6m59s
+
+NAMESPACE     NAME                                                 READY   AGE
+kube-system   statefulset.apps/ck-storage-rawfile-csi-controller   0/1     7m2s
+
+NAMESPACE     NAME                                                 REFERENCE            TARGETS                                     MINPODS   MAXPODS   REPLICAS   AGE
+kube-system   horizontalpodautoscaler.autoscaling/ck-dns-coredns   Deployment/coredns   cpu: <unknown>/80%, memory: <unknown>/70%   2         100       2          7m3s
+
