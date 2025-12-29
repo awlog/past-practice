@@ -1,0 +1,23 @@
+【Upload and publish a static website with S3】
+
+1. Create a S3 bucket
+
+2. Upload a html file from 'Objects'
+
+*the html uploaded here was from what I used in 2021 in wordpress for my personal blog
+that was already terminated.
+
+3. Edit 'Static website hosting' under 'Properties'
+   ┗Click 'Enbale', enter the html 
+   ┗Input the html name under 'Index document'
+　 ┗Click 'Save changes'
+
+4. Edit 'Buckt policy' under 'Permission'
+   ┗copy the policy exmaple from the site below and edit the example.com of "Resrouce"  
+     to ypur bucket name
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html?icmpid=docs_amazons3_console
+
+5. Gp back to 'Propertis' and find 'Bucket website endpoint'
+　　┗click on the URL generated to open the html
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html?icmpid=docs_amazons3_console
