@@ -21,3 +21,5 @@ https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.ht
 　　┗click on the URL generated to open the html
 
 http://test7544-aws-1.s3-website-ap-northeast-1.amazonaws.com/
+
+*The S3 bucket will be deleted to avoid any unexpected.
