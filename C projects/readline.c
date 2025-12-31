@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// create a simple program that reads a specific line of a txt file.
+// create a simple program that reads a specific line from a txt file.
 
 #define FILENAME_SIZE 1024
 #define MAX_LINE 2048
@@ -62,4 +62,5 @@ int main()
     fclose(file);
   
     return 0;
+
 }
