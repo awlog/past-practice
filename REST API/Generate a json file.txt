@@ -58,5 +58,7 @@ C:\Users\alan\node-rest-folder>
 
 
 3.VS code のterminal (git bash): install express
-
 npm install express
+
+4. Use the sitre below to test GET, POST, etc.
+https://www.postman.com/
