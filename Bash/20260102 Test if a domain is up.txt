@@ -7,13 +7,13 @@ nano for_test_ping_domains.sh
 bash for_test_ping_domains.sh
 
 *Please see the attached sccrenshot for the result.
-**Ctrl + 0 to get into the nano file again 
-
 
 =====================
 【Script used】
 
 #!/bin/bash
+
+
 
 for x in google.com bing.com;
 do
@@ -22,4 +22,5 @@ do
   else
     echo "$x is down"
   fi
+
 done
