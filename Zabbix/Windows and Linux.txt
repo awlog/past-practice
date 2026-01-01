@@ -1,0 +1,12 @@
+For Windows 10/11
+1. Download Zabbix Agent
+https://www.zabbix.com/download_agents#tab:44
+
+2.Installation Guide
+https://www.zabbix.com/documentation/current/jp/manual/installation/install_from_packages/win_msi
+
+3.「Management Tool」 → 「Service」
+
+For Linux
+1. Install Zabbix
+https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=22.04&components=server_frontend_agent&db=mysql&ws=apache
