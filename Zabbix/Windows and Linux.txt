@@ -9,4 +9,49 @@ https://www.zabbix.com/documentation/current/jp/manual/installation/install_from
 
 For Linux
 1. Install Zabbix
-https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=22.04&components=server_frontend_agent&db=mysql&ws=apache
+
+https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=20.04&components=proxy&db=mysql&ws=
+
+root@LAPTOP-O72JMJD5:/home/awtest# lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.6 LTS
+Release:        20.04
+Codename:       focal
+
+root@LAPTOP-O72JMJD5:/home/awtest# wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release_latest_7.4+ubuntu20.04_all.deb
+--2026-01-02 07:19:00--  https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release_latest_7.4+ubuntu20.04_all.deb
+Resolving repo.zabbix.com (repo.zabbix.com)... 178.128.6.101, 2604:a880:2:d0::2062:d001
+Connecting to repo.zabbix.com (repo.zabbix.com)|178.128.6.101|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2026-01-02 07:19:01 ERROR 404: Not Found.
+
+root@LAPTOP-O72JMJD5:/home/awtest# wget https://repo.zabbix.com
+--2026-01-02 07:20:42--  https://repo.zabbix.com/
+Resolving repo.zabbix.com (repo.zabbix.com)... 178.128.6.101, 2604:a880:2:d0::2062:d001
+Connecting to repo.zabbix.com (repo.zabbix.com)|178.128.6.101|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html’
+
+index.html                        [ <=>                                              ]   3.25K  --.-KB/s    in 0s
+
+2026-01-02 07:20:42 (7.71 MB/s) - ‘index.html’ saved [3332]
+----
+Index of /
+../
+non-supported/                                     22-Aug-2024 07:36                   -
+third-party/                                       15-Oct-2024 13:15                   -
+zabbix/                                            30-Oct-2025 08:00                   -
+zabbix-agent2-plugins/                             29-Feb-2024 14:02                   -
+zabbix-tools/                                      12-Dec-2024 13:19                   -
+RPM-GPG-KEY-ZABBIX                                 16-Aug-2016 10:46                1333
+RPM-GPG-KEY-ZABBIX-08EFA7DD                        04-Jul-2024 07:41                3163
+RPM-GPG-KEY-ZABBIX-79EA5ED4                        16-Aug-2016 10:46                1333
+RPM-GPG-KEY-ZABBIX-A14FE591                        16-Aug-2016 10:46                1719
+RPM-GPG-KEY-ZABBIX-A14FE591-EL5                    14-Nov-2016 18:47                 954
+RPM-GPG-KEY-ZABBIX-B5333005                        04-Jun-2024 12:11                3163
+RPM-GPG-KEY-ZABBIX-TOOLS                           12-Apr-2024 10:21                3134
+zabbix-official-repo-apr2024.gpg                   08-May-2024 12:27                2275
+zabbix-official-repo.key                           23-May-2024 13:02                9033
+----
