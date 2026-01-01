@@ -1,0 +1,5 @@
+1. Oracle VirutalBox
+https://www.oracle.com/jp/virtualization/technologies/vm/downloads/virtualbox-downloads.html
+
+2. Donwload Almalinux
+https://almalinux.org/
