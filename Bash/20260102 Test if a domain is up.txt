@@ -1,9 +1,9 @@
 Used in Nano to do a quick test a website is up or down.
 
-1. create a nano file
+1. Create a nano file
 nano for_test_ping_domains.sh
 
-2. run the script
+2. Run the script
 bash for_test_ping_domains.sh
 
 =====================
@@ -20,4 +20,5 @@ do
   fi
 
 done
+
 
