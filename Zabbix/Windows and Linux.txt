@@ -19,39 +19,40 @@ Description:    Ubuntu 20.04.6 LTS
 Release:        20.04
 Codename:       focal
 
-root@LAPTOP-O72JMJD5:/home/awtest# wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release_latest_7.4+ubuntu20.04_all.deb
---2026-01-02 07:19:00--  https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release_latest_7.4+ubuntu20.04_all.deb
-Resolving repo.zabbix.com (repo.zabbix.com)... 178.128.6.101, 2604:a880:2:d0::2062:d001
-Connecting to repo.zabbix.com (repo.zabbix.com)|178.128.6.101|:443... connected.
-HTTP request sent, awaiting response... 404 Not Found
-2026-01-02 07:19:01 ERROR 404: Not Found.
-
-root@LAPTOP-O72JMJD5:/home/awtest# wget https://repo.zabbix.com
---2026-01-02 07:20:42--  https://repo.zabbix.com/
+root@LAPTOP-O72JMJD5:/home/awtest# wget https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu20.04_all.deb
+--2026-01-02 07:36:54--  https://repo.zabbix.com/zabbix/7.4/release/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_7.4+ubuntu20.04_all.deb
 Resolving repo.zabbix.com (repo.zabbix.com)... 178.128.6.101, 2604:a880:2:d0::2062:d001
 Connecting to repo.zabbix.com (repo.zabbix.com)|178.128.6.101|:443... connected.
 HTTP request sent, awaiting response... 200 OK
-Length: unspecified [text/html]
-Saving to: ‘index.html’
+Length: 7336 (7.2K) [application/octet-stream]
+Saving to: ‘zabbix-release_latest_7.4+ubuntu20.04_all.deb’
 
-index.html                        [ <=>                                              ]   3.25K  --.-KB/s    in 0s
+zabbix-release_latest_7.4+ubu 100%[=================================================>]   7.16K  --.-KB/s    in 0s
 
-2026-01-02 07:20:42 (7.71 MB/s) - ‘index.html’ saved [3332]
-----
-Index of /
-../
-non-supported/                                     22-Aug-2024 07:36                   -
-third-party/                                       15-Oct-2024 13:15                   -
-zabbix/                                            30-Oct-2025 08:00                   -
-zabbix-agent2-plugins/                             29-Feb-2024 14:02                   -
-zabbix-tools/                                      12-Dec-2024 13:19                   -
-RPM-GPG-KEY-ZABBIX                                 16-Aug-2016 10:46                1333
-RPM-GPG-KEY-ZABBIX-08EFA7DD                        04-Jul-2024 07:41                3163
-RPM-GPG-KEY-ZABBIX-79EA5ED4                        16-Aug-2016 10:46                1333
-RPM-GPG-KEY-ZABBIX-A14FE591                        16-Aug-2016 10:46                1719
-RPM-GPG-KEY-ZABBIX-A14FE591-EL5                    14-Nov-2016 18:47                 954
-RPM-GPG-KEY-ZABBIX-B5333005                        04-Jun-2024 12:11                3163
-RPM-GPG-KEY-ZABBIX-TOOLS                           12-Apr-2024 10:21                3134
-zabbix-official-repo-apr2024.gpg                   08-May-2024 12:27                2275
-zabbix-official-repo.key                           23-May-2024 13:02                9033
-----
+2026-01-02 07:36:55 (442 MB/s) - ‘zabbix-release_latest_7.4+ubuntu20.04_all.deb’ saved [7336/7336]
+
+root@LAPTOP-O72JMJD5:/home/awtest# dpkg -i zabbix-release_latest_7.4+ubuntu20.04_all.deb
+Selecting previously unselected package zabbix-release.
+(Reading database ... 32981 files and directories currently installed.)
+Preparing to unpack zabbix-release_latest_7.4+ubuntu20.04_all.deb ...
+Unpacking zabbix-release (1:7.4-1+ubuntu20.04) ...
+Setting up zabbix-release (1:7.4-1+ubuntu20.04) ...
+
+root@LAPTOP-O72JMJD5:/home/awtest# apt update
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: The list of sources could not be read.
+root@LAPTOP-O72JMJD5:/home/awtest# apt install zabbix-proxy-mysql zabbix-sql-scripts
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: The list of sources could not be read.
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: Invalid value set for option Signed-By regarding source http://nginx.org/packages/mainline/ubuntu/ 'lsb_release (not a fingerprint)
+E: The list of sources could not be read.
+
+========
+Tried all steps from the post below but still did not work.
+・https://discourse.ubuntu.com/t/conflicting-values-set-for-option-signed-by-regarding-source/67667
+・https://askubuntu.com/questions/1156409/conflicting-values-set-for-option-signed-by-regarding-source
+========
+
