@@ -1,0 +1,50 @@
+PC2 ASUS X512DA (Win 11) is used.
+
+Followed the below1 article to generate SSH and connect to Tera Term
+as well as editting vim  to enable connectionj\ with Tera Term
+・https://qiita.com/nnydtmg157/items/fc8bb2808ab318105116
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.
+$ sudo -E apt update
+$ sudo -E apt upgrade 
+$ sudo -E apt install openssh-server
+
+2.
+$ sudo ssh-keygen -A
+
+3.
+【vim】
+https://qiita.com/sa_6ebdc2/items/265e6f6c921139a57ca0
+
+sudo vi /etc/ssh/sshd_config
+
+Port 10022 
+PasswordAuthentication yes 
+
+:wq
+
+*Use 「i」key and「Esc」key to swtich between command mode or edit mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+4.
+$ sudo /etc/init.d/ssh status
+
+$ sudo /etc/init.d/ssh restart
+(restart is required for the change to take effect.)
+
+4. Tera Term
+https://forest.watch.impress.co.jp/library/software/utf8teraterm/download_10868.html
+
+
+ホスト：接続先ホストのアドレス（ドメイン名もしくはIPアドレス）→ set to localhost for simplicity
+サービス：SSH
+TCPポート：22
+バージョン：SSH2
+
+After opening the Tera Term, you can change the setting from the top menu & then Other setting（D）to 
+・change the log file name with 「%Y%m%d_%H%M%S_&h.log」 to display time details when saving a log file
+・have the log to be recorded automatically
+
+
